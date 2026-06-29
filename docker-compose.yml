@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+
+  x402-scheduler:
+
+    build: .
+
+    container_name: x402-scheduler-service
+
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - .:/app
