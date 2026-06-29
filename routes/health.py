@@ -1,16 +1,23 @@
 from fastapi import APIRouter
 
+from core.config import settings
+from core.responses import success
+
 router = APIRouter(
     prefix="/health",
-    tags=["Health"]
+    tags=["Health"],
 )
 
 
 @router.get("/")
-def health():
+async def health():
 
-    return {
-
-        "status":"healthy"
-
-    }
+    return success(
+        message="Health check successful.",
+        data={
+            "status": "healthy",
+            "service": settings.APP_NAME,
+            "version": settings.APP_VERSION,
+            "environment": settings.ENVIRONMENT,
+        },
+    )
